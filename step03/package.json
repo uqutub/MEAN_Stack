@@ -1,0 +1,15 @@
+{
+  "name": "firstapp",
+  "version": "1.0.0",
+  "description": "My First App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Usuf",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^2.3.3",
+    "express": "^4.13.3"
+  }
+}
