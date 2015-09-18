@@ -1,0 +1,34 @@
+<!-- views/pages/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <% include ../partials/menu %>
+    
+    <!-- Show Header if only page is index/homepage -->
+    <% if(view == '_index'){%>
+    <% include ../partials/header %>
+    <%}%>
+
+    <!-- Page Content / Body -->
+    <%- include('../partials/' + view) %> 
+
+    <!-- Footer -->
+    <footer>
+       <% include ../partials/footer %>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
