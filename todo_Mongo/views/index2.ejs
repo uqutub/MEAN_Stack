@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>
+<%= title %>
+</title>
+</head>
+<body>
+<form name="taskform" method="post">
+Your Name: <input type="text" name="CreatedBy" placeholder="Your Name Pls"/>  <br/>
+Task: <input type="text" name="Task" placeholder="Write your todo task"/> <br/>
+<input type="submit" name="Action" value="Add" />
+</form>
+
+
+<%= (items.length > 0) ? '' : '' %>
+
+
+<%if(items.length > 0){%>
+<h5> Tasks <h5>
+<ul>
+<% items.forEach(function(item){%>
+<li> <%= item.CreatedBy %>: <%= item.Task %>  </li>
+<%});%>
+</ul>
+<%} else {%>
+<i> not exists </i>
+<%}%>
+
+
+</body>
+</html>

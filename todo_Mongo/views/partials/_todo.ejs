@@ -1,0 +1,50 @@
+<div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Simple/Sample Todo</h2>
+                    
+                    <form name="taskform" class="form-horizontal" method="post">
+  <div class="form-group">
+    <label for="CreatedBy" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" name="CreatedBy" class="form-control" id="CreatedBy" placeholder="Your Name Pls">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Task" class="col-sm-2 control-label">Task</label>
+    <div class="col-sm-10">
+      <input type="text" name="Task" class="form-control" id="Task" placeholder="Write your todo task">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+     <input type="submit" name="Action" value="Add" class="btn btn-default" />
+    </div>
+  </div>
+</form>
+
+
+
+                    
+
+<%if(items.length > 0){%>
+<h5> Tasks <h5>
+<ul>
+<% items.forEach(function(item){%>
+<li class="text-success"> 
+  <%= item.CreatedBy %>: <span class="text-info"> <%= item.Task %> </span>  
+  <a href="/todo/delete/<%= item._id %>" class="text-danger"> <i class="glyphicon glyphicon-remove"></i></a> 
+</li>
+<%});%>
+</ul>
+<%} else {%>
+<i class="text-danger"> Please Add Some Task First.! </i>
+<%}%>
+
+                  
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
