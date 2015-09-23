@@ -65,15 +65,10 @@ Post(item: ITodoItem): void {
 
 Get(){
 	TodoEntity.find((err, obj)=>{
-		if(err)
-		{
-			console.log('todo get: err')
-		}
-		
+		if(err){ console.log('todo get: err'); }
 		console.log('todo get: loading obj')
 		TodoItem.TodoArray = obj
 	});
-//return TodoItem.TodoArray;	
 };
 
 //Method 1 without return keybord using callback function
@@ -89,15 +84,11 @@ GetJson(callBack: (err, obj) => void) {
 //method 02 using Promise Pattren
 GetJson2(){
 	 var deferred = q.defer();
-	 
 	 TodoEntity.find((err, obj)=>{
-		if(err) {
-			deferred.reject(err) // rejects the promise with `er` as the reason
-		}
-		deferred.resolve(obj) // fulfills the promise with `data` as the value
+		if(err) { deferred.reject(err);	}
+		deferred.resolve(obj);
 	});
-	
-	return deferred.promise // the promise is returned
+	return deferred.promise;
 };
 
 
