@@ -35,31 +35,6 @@ router.get('/todo.json2', (req, res) => {
 	});
 }); 
 
-/*router.get('/todo.json', (req, res) => {
-	var x = new TodoItem();
-	var obj = x.GetJson();
-	
-	let cache= [];
-		JSON.stringify(obj, (key, value)=>{
-			if(typeof value === 'object' && value !== null){
-				if(cache.indexOf(value) !== -1){
-					//cirular refernce found, discard key
-					return;
-				}
-				//store value in our collection
-				cache.push(value);
-			}
-		})
-	 console.log('GetJson----- obj: ' + JSON.stringify(TodoItem.TodoArray));
-		
-	
-	//console.log('y--: ' + JSON.stringify(y));
-	console.log('bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb');
-	res.json(obj);
-	
-	//x.Get();
-	//res.render('pages/layout', {items: TodoItem.TodoArray, title: "Todo-App", view:"_todo"});
-});*/ 
 
 //Function for getting Post Data and return object
 let querry_to_hash = (querryString: string[]) => {
@@ -79,30 +54,8 @@ return <ITodoItem>j;
 //Post From Server (EJS)
 router.post('/', (req, res) => {
 	console.log('body parser: ' + JSON.stringify(req.body));
-	let itemObj = new TodoItem(req.body/*{
-		Task: req.body.Task,
-		CreatedBy: req.body.CreatedBy,
-		CreatedOn: new Date,
-		Status: TaskStatus.None
-	}*/);
+	let itemObj = new TodoItem(req.body);
 	res.render('pages/layout', {items: TodoItem.TodoArray, title: "Todo-App", view:"_todo"});
-	
-	//Without BodyParser -- Start --
-	/*
-	let bodyStr = '';
-	req.on("data", (chunk) => {
-		bodyStr += chunk.toString();
-	});
-	
-	req.on("end", () => {
-		let taskObj: ITodoItem = querry_to_hash(bodyStr.split('&'));
-		let itemObj = new TodoItem(taskObj);
-		//itemObj.Post(taskObj);
-		res.render('pages/layout', {items: TodoItem.TodoArray, title: "Todo-App", view:"_todo"});
-	});
-	*/
-	//Without BodyParser -- End --
-		
 });
 
 router.post('/create/', (req, res)=>{
@@ -117,27 +70,7 @@ router.get('/delete/:id', (req, res) => {
 	x.Delete(req.params.id.toString());
 	
 	console.log('req.params.id: ' + req.params.id);
-	
-	/*
-	let bodyStr = '';
-	
-	req.on("data", (chunk) => {
-		bodyStr += chunk.toString();
-	});
-	
-	req.on("end", () => {
-		var abc = bodyStr.split('&');
-		console.log('0' + abc[0]);
-		console.log('1' + abc[1]);
-		
-		let taskObj: ITodoItem = querry_to_hash(bodyStr.split('&'));
-		//let itemObj = new TodoItem(taskObj);
-		//itemObj.Post(taskObj);
-		res.render('pages/layout', {items: TodoItem.TodoArray, title: "Todo-App", view:"_todo"});
-	});
-		*/
-		res.redirect('/todo/');
-	//res.render('pages/layout', {items: TodoItem.TodoArray, title: "Todo-App", view:"_todo"});
+	res.redirect('/todo/');
 });
 
 export = router;
