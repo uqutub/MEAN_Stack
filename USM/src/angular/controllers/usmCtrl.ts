@@ -2,7 +2,7 @@
 //import angular = require('angular');
 
 (() => {
-	function userController($scope, $http, myfactory) {
+	function userController($scope, myfactory) {
 		let f = myfactory;
 	
 	
@@ -16,7 +16,6 @@
 			$scope.user.UserName = $scope.user.Email;
 			
 			f.post("/user/Create/",$scope.user).then(function (d) {
-				console.log('Ang CTRL: '+ JSON.stringify($scope.user));
 				if(d.status == "200"){
 					$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
 					$scope.GetAllUsers();
@@ -45,34 +44,52 @@
 	
 	$scope.EditUser = () =>{
 		if($scope.user._id) {
-		
-				$http.put("/user/Edit/",$scope.user).then(function(response) {
-					if(response.data.status == "200")
-					{
-						//$scope.Users.push($scope.user);
-						$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
-						$scope.GetAllUsers();
-						alert('successfuly updated');
-						//$scope.loadData();
-					}
-				}, 
-				function(response) { // optional
+			f.put("/user/Edit/",$scope.user).then(function (d) {
+				if(d.status == "200")
+				{
+					$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
+					$scope.GetAllUsers();
+					alert('successfuly updated');
+				}	
+			}, function(response) { // optional
 						// failed
-				});	
+			});
+		
+				//$http.put("/user/Edit/",$scope.user).then(function(response) {
+				//	if(response.data.status == "200")
+				//	{
+				//		//$scope.Users.push($scope.user);
+				//		$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
+				//		$scope.GetAllUsers();
+				//		alert('successfuly updated');
+				//		//$scope.loadData();
+				//	}
+				//}, 
+				//function(response) { // optional
+						// failed
+				//});	
 		} //closing if
 	}; //closing Edituser
 	
 	$scope.DeleteUser = (id: string) => {
-		$http.delete("/user/Delete/"+id).then(function(response){
-			if(response.data.status == "200")
-					{
-						//$scope.Users.push($scope.user);
-						$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
-						$scope.GetAllUsers();
-						alert('successfuly Delete');
-						//$scope.loadData();
-					}
-		});
+		f.delete("/user/Edit/",$scope.user).then(function (d) {
+				if(d.status == "200")
+				{
+					$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
+					$scope.GetAllUsers();
+					alert('successfuly Delete');	
+				}
+		}
+		//$http.delete("/user/Delete/"+id).then(function(response){
+			//if(response.data.status == "200")
+			//		{
+						////$scope.Users.push($scope.user);
+						//$scope.user = {_id: null, FirstName: "", LastName: "",	UserName: "",	Email: "",	Password: "",	Address: "" };
+						//$scope.GetAllUsers();
+						//alert('successfuly Delete');
+						///$scope.loadData();
+					//}
+		//});
 	}; //closing Delete User
 	
 	
@@ -108,6 +125,6 @@
 	};//usmCtrl Function Closing
 	
 	angular.module('appJS').controller('userController', userController);
-	userController.$inject=['$scope', '$http', 'myfactory'];
+	userController.$inject=['$scope', 'myfactory'];
 	
 })();
