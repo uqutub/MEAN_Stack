@@ -1,0 +1,70 @@
+<div ng-controller="todoController">
+
+<div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-6 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Simple/Sample Todo</h2>
+                    
+<form name="taskform" class="form-horizontal" method="post">
+  <div class="form-group">
+    <label for="CreatedBy" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" name="CreatedBy" class="form-control" id="CreatedBy" placeholder="Your Name Pls" ng-model="task.CreatedBy">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Task" class="col-sm-2 control-label">Task</label>
+    <div class="col-sm-10">
+      <input type="text" name="Task" class="form-control" id="Task" placeholder="Write your todo task" ng-model="task.Task">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+     <!-- <input type="submit" name="Action" value="Add-From-Server" class="btn btn-default" /> -->
+     <input type="button" name="Action2" value="Add-From-Angularjs" class="btn btn-info" ng-click="post();" />
+    </div>
+  </div>
+</form>
+
+
+
+<div class="row">
+  <div class="col-md-6">
+  
+    <%if(model.length > 0){%>
+      <h5> Tasks (run from ejs)<h5>
+        <ul>
+          <% model.forEach(function(item){%>
+          <li class="text-success"> 
+          <%= item.CreatedBy %>: <span class="text-info"> <%= item.Task %> </span>  
+          <a class="text-danger" ng-click="Delete(<%= item._id %>);"> <i class="glyphicon glyphicon-remove"></i></a>
+          <!--<a href="/todo/delete/<%= item._id %>" class="text-danger"> <i class="glyphicon glyphicon-remove"></i></a>--> 
+          </li>
+          <%});%>
+        </ul>
+    <%} else {%>
+      <i class="text-danger"> Please Add Some Task First.! </i>
+    <%}%>
+
+  </div>
+
+<div class="col-md-6">
+  <h5>Tasks (run from angularjs)<h5>
+  Total Task: {{gists.length}}
+  <ul class="list-group">
+    <li ng-repeat="item in gists" class="list-group-item" ng-class-odd="'list-group-item list-group-item-info'" ng-class-even="'list-group-item list-group-item-warning'">
+      {{item.CreatedBy}} : {{item.Task}} 
+      <a class="text-danger" ng-click="Delete(item._id);"> <i class="glyphicon glyphicon-remove"></i></a>
+      <!--<a href="/todo/delete/{{item._id}}" class="text-danger"> <i class="glyphicon glyphicon-remove"></i></a>--> 
+    </li>
+  </ul>
+</div>
+</div>                    
+
+                </div>
+            </div>
+        </div>
+        <!-- /.container -->
+        </div>

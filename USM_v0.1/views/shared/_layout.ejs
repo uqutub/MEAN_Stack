@@ -1,0 +1,41 @@
+<!-- Layout.ejs -->
+<!DOCTYPE html>
+<html lang="en" ng-app="appJS">
+
+<head>
+    <% include ../includes/head %>
+</head>
+
+<body>
+    <% include ../includes/menu %>
+    
+    <!-- Show Header if only page is index/homepage -->
+    <% if(view == '_index'){%>
+    <% include ../includes/header %>
+    <%}%>
+    
+    <!-- Page Content / Body -->
+    <%- include('../partials/' + view) %> 
+
+
+    <!-- Footer -->
+    <footer>
+       <% include ../includes/footer %>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    
+    <!-- Angular -->
+    <% include ../includes/angular %>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
+   
+    
+
+</body>
+
+</html>
+
